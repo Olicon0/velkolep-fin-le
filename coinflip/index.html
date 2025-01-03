@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coinflip Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <h1>Coinflip Game</h1>
+                <div id="result" class="result"><!-- Results will appear here --></div>
+            </div>
+            <div class="wallet-section">
+                <button id="connect-wallet-btn">Connect Wallet</button>
+                <p id="wallet-balance">Wallet Balance: N/A</p>
+            </div>
+        </div>
+                
+        <div class="play-area">
+            <div class="multiplier">
+                <p>Multiplier</p>
+                <div id="multiplier-value">0x</div>
+            </div>
+            
+            <div class="coin-container">
+                <div id="coin" class="coin">
+                    <div class="coin-front">PATCO</div>
+                    <div class="coin-back">MATCO</div>
+                </div>
+                <div id="cashout-display" class="hidden">
+                    <p id="cashout-multiplier"></p>
+                    <p id="cashout-profit"></p>
+                </div>
+            </div>
+            
+            <div class="series-counter">
+                <p>Series</p>
+                <div id="series-value">0</div>
+            </div>
+        </div>
+        
+        <div class="bet-menu">
+            <div class="bet-controls-row">
+                <div class="amount-section">
+                    <p>Selected Amount:</p>
+                    <div class="bet-input-container">
+                        <input type="number" id="bet-amount" placeholder="Enter amount" step="0.01" min="0.01" oninput="updateBetAmount()" />
+                        <button id="doubler-btn" onclick="doubleBetAmount()">2x</button>
+                        <button id="divider-btn" onclick="halveBetAmount()">½</button>
+                    </div>
+                </div>
+                
+                <div class="currency-section">
+                    <p>Select Currency:</p>
+                    <div class="currency-buttons">
+                        <button id="currency-sol" onclick="switchCurrency('SOL')" class="active">SOL</button>
+                        <button id="currency-rapr" onclick="switchCurrency('RAPR')">RAPR</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bet-buttons">
+                <button onclick="setBetAmount(0.1)">0.1</button>
+                <button onclick="setBetAmount(0.5)">0.5</button>
+                <button onclick="setBetAmount(1)">1</button>
+                <button onclick="setBetAmount(5)">5</button>
+            </div>
+        </div>
+        
+        <div class="bet-controls">
+            <div class="bet-button">
+                <button id="bet-btn" onclick="placeBet()">Bet</button>
+                <button id="cash-out-btn" style="display: none;" onclick="cashOut()">Cash Out</button>
+                <span id="cash-out-amount"></span>
+            </div>
+            
+            <div class="buttons">
+                <button id="heads-btn" onclick="selectSide('hlava')" disabled>Patco</button>
+                <button id="tails-btn" onclick="selectSide('orel')" disabled>Matco</button>
+            </div>
+        </div>
+
+        <audio id="win-sound" src="coinflipwin.wav"></audio>
+        <audio id="loss-sound" src="coinfliploss.wav"></audio>
+        <audio id="cashout-sound" src="cashout.wav"></audio>
+        
+        <div id="result" class="result"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.1/lib/index.iife.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
